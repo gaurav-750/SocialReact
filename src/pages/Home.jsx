@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 
 import propTypes from 'prop-types';
+import Comments from '../Components/Comments';
 
 const Home = ({ posts }) => {
   console.log(posts, 'posts');
@@ -39,17 +40,7 @@ const Home = ({ posts }) => {
             </div>
 
             <div className={styles.postCommentsList}>
-              <div className={styles.postCommentsItem}>
-                <div className={styles.postCommentHeader}>
-                  <span className={styles.postCommentAuthor}>Bill</span>
-                  <span className={styles.postCommentTime}>a minute ago</span>
-                  <span className={styles.postCommentLikes}>22</span>
-                </div>
-
-                <div className={styles.postCommentContent}>
-                  This is a random comment
-                </div>
-              </div>
+              <Comments comments={post.comments} />
             </div>
           </div>
         </div>
