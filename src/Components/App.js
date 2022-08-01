@@ -1,23 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-// import { getPosts } from '../api/index';
 import { getPosts } from '../api';
 import { Home } from '../pages/index';
+import Loader from './Loader';
 
 const App = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getPosts();
-      console.log('response', JSON.stringify(response));
+      console.log('response', response);
+
+      if (response.success) {
+        setPosts(response.data.posts);
+        setLoading(false);
+      }
     };
 
     // call the function
     fetchData();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div>
-      <Home />
+      <Home posts={posts} />
     </div>
   );
 };

@@ -7,7 +7,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   const headers = {
     'content-type': 'application/json',
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': '*',
   };
 
   if (token) {
@@ -25,24 +25,36 @@ const customFetch = async (url, { body, ...customConfig }) => {
   if (body) {
     config.body = JSON.stringify(body);
   }
-  console.log('config:', config);
+  // console.log('config:', config);
 
   try {
-    await fetch(url, config)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          console.log('data:', data.data);
-          return {
-            data: data.data,
-            success: true,
-          };
-        }
+    const response = await fetch(url, config);
+    // console.log('response', response);
+    const data = await response.json();
 
-        throw new Error(data.message); //else throw the error => will go in catch
-      });
+    if (data.success) {
+      return {
+        data: data.data,
+        success: true,
+      };
+    }
+
+    // await fetch(url, config)
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.success) {
+    //       console.log('data:', data);
+    //       return {
+    //         data: data.data,
+    //         success: true,
+    //       };
+    //     }
+    // })
+
+    throw new Error(data.message); //else throw the error => will go in catch
   } catch (error) {
-    // console.log('Error', error);
     return {
       message: error.message,
       success: false,
@@ -50,10 +62,10 @@ const customFetch = async (url, { body, ...customConfig }) => {
   }
 };
 
-export const getPosts = (page = 1, limit = 5) => {
-  return customFetch(API_URLS.posts(page, limit), {
+export const getPosts = async (page = 1, limit = 5) => {
+  const res = await customFetch(API_URLS.posts(page, limit), {
     method: 'GET',
   });
-};
 
-// export default { getPosts };
+  return res;
+};
