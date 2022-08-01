@@ -42,7 +42,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
         throw new Error(data.message); //else throw the error => will go in catch
       });
   } catch (error) {
-    console.log('Error', error);
+    // console.log('Error', error);
     return {
       message: error.message,
       success: false,

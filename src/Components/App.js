@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
 
-import { getPosts } from '../api/index';
+// import { getPosts } from '../api/index';
+import { getPosts } from '../api';
+import { Home } from '../pages/index';
 
 const App = () => {
   useEffect(() => {
-    async function fetchPost() {
+    const fetchData = async () => {
       const response = await getPosts();
-      console.log('response', response);
-    }
+      console.log('response', JSON.stringify(response));
+    };
 
-    fetchPost();
+    // call the function
+    fetchData();
   }, []);
 
-  return <div>App</div>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 };
 
 export default App;
