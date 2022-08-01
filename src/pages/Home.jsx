@@ -3,12 +3,14 @@ import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 
+import propTypes from 'prop-types';
+
 const Home = ({ posts }) => {
   console.log(posts, 'posts');
   return (
     <div className={styles.postsList}>
       {posts.map((post) => (
-        <div className={styles.postWrapper}>
+        <div className={styles.postWrapper} key={post._id}>
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
               {/* <img src="./Images/man.png" alt="user-pic" /> */}
@@ -54,6 +56,10 @@ const Home = ({ posts }) => {
       ))}
     </div>
   );
+};
+
+Home.propTypes = {
+  posts: propTypes.array.isRequired,
 };
 
 export default Home;
