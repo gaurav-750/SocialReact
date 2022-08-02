@@ -7,7 +7,7 @@ import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
 
 const Home = ({ posts }) => {
-  console.log(posts, 'posts');
+  // console.log(posts, 'posts');
   return (
     <div className={styles.postsList}>
       {posts.map((post) => (
@@ -15,7 +15,8 @@ const Home = ({ posts }) => {
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
               {/* <img src="./Images/man.png" alt="user-pic" /> */}
-              <PersonIcon fontSize="large" />
+              {/* <PersonIcon fontSize="large" /> */}
+              <img src={process.env.PUBLIC_URL + 'Images/man.png'} />
               <div>
                 <span className={styles.postAuthor}>{post.user.name}</span>
                 <span className={styles.postTime}>a minute ago</span>

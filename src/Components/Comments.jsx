@@ -2,7 +2,6 @@ import React from 'react';
 import styles from '../styles/home.module.css';
 
 const Comments = ({ comments }) => {
-  console.log('comments', comments);
   return (
     <div>
       {comments.map((comment) => (

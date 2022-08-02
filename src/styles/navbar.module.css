@@ -1,6 +1,6 @@
 .nav {
   display: flex;
-  background: #6200ee;
+  background: #a66cff;
   padding: 10px 20px;
   align-items: center;
   justify-content: space-between;
@@ -14,13 +14,14 @@
   color: #ece60e;
 }
 .nav .userDp {
-  height: 40px;
+  height: 50px;
 }
 .nav .user {
   display: flex;
   align-items: center;
 }
 .nav span {
+  font-size: 23px;
   margin-left: 10px;
 }
 .nav .rightNav {
@@ -36,7 +37,8 @@
   list-style-type: none;
 }
 .nav .navLinks ul li {
-  padding: 0 4px;
+  padding: 0 6px;
+  margin: 0 10px;
 }
 .nav .navLinks ul li a {
   text-decoration: none;
