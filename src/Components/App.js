@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getPosts } from '../api';
 import { Home, Login } from '../pages/index';
 import Loader from './Loader';
@@ -32,18 +32,23 @@ const App = () => {
 
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home posts={posts} />}></Route>
-        </Routes>
+        <Switch>
+          <Route exact path="/">
+            <Home posts={posts} />
+          </Route>
 
-        <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="*" element={<Page404 />}></Route>
-        </Routes>
-      </BrowserRouter>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+
+          <Route exact path="*">
+            <Page404 />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

@@ -5,7 +5,7 @@ const Comments = ({ comments }) => {
   return (
     <div>
       {comments.map((comment) => (
-        <div className={styles.postCommentsItem}>
+        <div className={styles.postCommentsItem} key={comment._id}>
           <div className={styles.postCommentHeader}>
             <span className={styles.postCommentAuthor}>
               {comment.user.name}

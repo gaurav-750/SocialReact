@@ -1,7 +1,6 @@
 import styles from '../styles/home.module.css';
 import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PersonIcon from '@mui/icons-material/Person';
 
 import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
@@ -15,7 +14,6 @@ const Home = ({ posts }) => {
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
               {/* <img src="./Images/man.png" alt="user-pic" /> */}
-              {/* <PersonIcon fontSize="large" /> */}
               <img src={process.env.PUBLIC_URL + 'Images/man.png'} />
               <div>
                 <span className={styles.postAuthor}>{post.user.name}</span>
