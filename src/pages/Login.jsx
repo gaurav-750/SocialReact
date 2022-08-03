@@ -5,7 +5,6 @@ import { useToasts } from 'react-toast-notifications';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loggingIn, setLogginIn] = useState(false);
 
   const { addToast } = useToasts();
 
@@ -17,8 +16,6 @@ const Login = () => {
         appearance: 'error',
       });
     }
-
-    setLogginIn(true);
   };
 
   return (
