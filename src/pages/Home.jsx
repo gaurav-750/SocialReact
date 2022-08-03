@@ -14,7 +14,10 @@ const Home = ({ posts }) => {
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
               {/* <img src="./Images/man.png" alt="user-pic" /> */}
-              <img src={process.env.PUBLIC_URL + 'Images/man.png'} />
+              <img
+                src={process.env.PUBLIC_URL + 'Images/man.png'}
+                alt="profile"
+              />
               <div>
                 <span className={styles.postAuthor}>{post.user.name}</span>
                 <span className={styles.postTime}>a minute ago</span>

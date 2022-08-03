@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className={styles.leftDiv}>
         <Link to="/">
           <img
-            alt=""
+            alt="Logo"
             src="https://ninjasfiles.s3.amazonaws.com/0000000000003454.png"
           />
         </Link>
@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               src={process.env.PUBLIC_URL + 'Images/Gauravspiccropped.png'}
-              alt=""
+              alt="Profile"
               className={styles.userDp}
             />
             {/* <img src="" alt="" className={styles.userDp} /> */}
