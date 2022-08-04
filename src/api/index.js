@@ -5,7 +5,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   const token = window.localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
 
   const headers = {
-    'content-type': 'application/json',
+    'content-type': 'application/x-www-form-url-encoded',
     Accept: 'application/json',
     // 'Access-Control-Allow-Origin': '*',
   };

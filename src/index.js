@@ -4,11 +4,19 @@ import App from './Components/App';
 import './styles/index.css';
 import { ToastProvider } from 'react-toast-notifications';
 
+import { AuthProvider } from './providers/AuthProvider';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  <ToastProvider autoDismiss autoDismissTimeout={3000} placement={'top-right'}>
-    <App />
-  </ToastProvider>
+  <AuthProvider>
+    <ToastProvider
+      autoDismiss
+      autoDismissTimeout={3000}
+      placement={'top-right'}
+    >
+      <App />
+    </ToastProvider>
+  </AuthProvider>
   // </React.StrictMode>
 );
