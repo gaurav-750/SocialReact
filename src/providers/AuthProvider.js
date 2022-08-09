@@ -9,9 +9,12 @@ const intialState = {
   loading: true,
 };
 
+//create a context (which would be present globally!)
 export const AuthContext = createContext(intialState);
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth();
+
+  //Provider
   return <AuthContext.Provider value={auth}> {children} </AuthContext.Provider>;
 };

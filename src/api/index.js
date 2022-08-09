@@ -1,4 +1,5 @@
 import { API_URLS, LOCAL_STORAGE_TOKEN_KEY } from '../utils';
+import { getBody } from '../utils/getBody';
 
 // function that'll fetch the req.data:
 const customFetch = async (url, { body, ...customConfig }) => {
@@ -23,7 +24,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   };
 
   if (body) {
-    config.body = JSON.stringify(body);
+    config.body = getBody(body);
   }
   // console.log('config:', config);
 
@@ -65,6 +66,15 @@ const customFetch = async (url, { body, ...customConfig }) => {
 export const getPosts = async (page = 1, limit = 5) => {
   const res = await customFetch(API_URLS.posts(page, limit), {
     method: 'GET',
+  });
+
+  return res;
+};
+
+export const login = async (email, password) => {
+  const res = await customFetch(API_URLS.login(), {
+    method: 'POST',
+    body: { email, password },
   });
 
   return res;
