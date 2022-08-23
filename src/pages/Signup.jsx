@@ -46,9 +46,12 @@ const Signup = () => {
     console.log('res after auth.signup', res);
 
     if (res.success) {
-      history.push('/login');
-      setSigningUp(false);
+      history.push('/login'); //*used to move from the current page to another one
+      //*So after this you will move to the login page
 
+      console.log('history', history);
+
+      setSigningUp(false);
       return addToast('User registered successfully, please login now', {
         appearance: 'success',
         autoDismiss: true,
