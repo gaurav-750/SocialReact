@@ -37,9 +37,7 @@ const Navbar = () => {
           <ul>
             {auth.user ? (
               <>
-                <li>
-                  <button onClick={auth.logout}> Log Out </button>
-                </li>
+                <li onClick={auth.logout}>Log Out</li>
               </>
             ) : (
               <>

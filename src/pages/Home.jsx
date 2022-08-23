@@ -34,7 +34,6 @@ const Home = () => {
     return <Loader />;
   }
 
-  console.log(posts, 'posts');
   return (
     <div className={styles.postsList}>
       {posts.map((post) => (

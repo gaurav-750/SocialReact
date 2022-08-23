@@ -11,7 +11,7 @@ import {
 import { LOCAL_STORAGE_TOKEN_KEY } from '../utils';
 import jwtDecode from 'jwt-decode';
 
-//!Wherever you want to use the context hook => 'useContext'
+//!Wherever you want to use the context hook => we use 'useContext'
 //*Now instead we have made a function 'useAuth' => so we'll call that
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -27,7 +27,7 @@ export const useProvideAuth = () => {
 
     if (userToken) {
       const user = jwtDecode(userToken);
-      console.log('token after decoding it', user);
+      // console.log('token after decoding it', user);
 
       setUser(user);
     }
