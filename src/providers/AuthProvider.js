@@ -7,6 +7,7 @@ const intialState = {
   login: () => {},
   logout: () => {},
   loading: true,
+  signup: () => {},
 };
 
 //create a context (which would be present globally!)

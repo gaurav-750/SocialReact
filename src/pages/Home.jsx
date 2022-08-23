@@ -1,12 +1,40 @@
 import styles from '../styles/home.module.css';
 import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getPosts } from '../api';
+import React, { useEffect, useState } from 'react';
+import Loader from '../Components/Loader';
+import { useAuth } from '../hooks';
 
 import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
 
-const Home = ({ posts }) => {
-  // console.log(posts, 'posts');
+const Home = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const auth = useAuth();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getPosts();
+      console.log('response in home', response);
+
+      if (response.success) {
+        setPosts(response.data.posts);
+        setLoading(false);
+      }
+    };
+
+    // call the function
+    fetchData();
+  }, []);
+
+  if (auth.loading) {
+    return <Loader />;
+  }
+
+  console.log(posts, 'posts');
   return (
     <div className={styles.postsList}>
       {posts.map((post) => (

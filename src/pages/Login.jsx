@@ -3,7 +3,6 @@ import styles from '../styles/login.module.css';
 import { useToasts } from 'react-toast-notifications';
 
 import { useAuth } from '../hooks';
-import { login } from '../api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +24,7 @@ const Login = () => {
 
     // const res = await auth.login(email, password);
     const res = await auth.login(email, password);
-    console.log('res in login:', res);
+
     if (res.success) {
       return addToast('Successfully Logged In!', {
         appearance: 'success',

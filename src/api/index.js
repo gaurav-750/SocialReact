@@ -6,9 +6,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   const token = window.localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
 
   const headers = {
-    'content-type': 'application/x-www-form-url-encoded',
-    Accept: 'application/json',
-    // 'Access-Control-Allow-Origin': '*',
+    'content-type': 'application/x-www-form-urlencoded',
   };
 
   if (token) {
@@ -26,11 +24,11 @@ const customFetch = async (url, { body, ...customConfig }) => {
   if (body) {
     config.body = getBody(body);
   }
-  // console.log('config:', config);
+  console.log('config:', config);
 
   try {
     const response = await fetch(url, config);
-    // console.log('response', response);
+    console.log('response in main fetch:', response);
     const data = await response.json();
 
     if (data.success) {
@@ -56,12 +54,63 @@ const customFetch = async (url, { body, ...customConfig }) => {
 
     throw new Error(data.message); //else throw the error => will go in catch
   } catch (error) {
+    console.log('error:', error.message);
     return {
       message: error.message,
       success: false,
     };
   }
 };
+
+// const customFetch = async (url, { body, ...customConfig }) => {
+//   const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+
+//   const headers = {
+//     'content-type': 'application/x-www-form-urlencoded',
+//     'Access-Control-Allow-Origin': '*',
+//   };
+
+//   if (token) {
+//     headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   const config = {
+//     ...customConfig,
+//     headers: {
+//       ...headers,
+//       ...customConfig.headers,
+//     },
+//   };
+
+//   console.log('c', config);
+
+//   if (body) {
+//     config.body = getBody(body);
+//   }
+
+//   try {
+//     console.log('url', url);
+//     const response = await fetch(url, config);
+//     console.log('MAIN res:', response);
+//     const data = await response.json();
+//     console.log('data:', data);
+
+//     if (data.success) {
+//       return {
+//         data: data.data,
+//         success: true,
+//       };
+//     }
+
+//     throw new Error(data.message);
+//   } catch (error) {
+//     console.error('error');
+//     return {
+//       message: error.message,
+//       success: false,
+//     };
+//   }
+// };
 
 export const getPosts = async (page = 1, limit = 5) => {
   const res = await customFetch(API_URLS.posts(page, limit), {
@@ -77,5 +126,15 @@ export const login = async (email, password) => {
     body: { email, password },
   });
 
+  return res;
+};
+
+export const signUp = async (name, email, password, confirmPassword) => {
+  const res = await customFetch(API_URLS.signup(), {
+    method: 'POST',
+    body: { name, email, password, confirm_password: confirmPassword },
+  });
+
+  console.log('response in signup api:', res);
   return res;
 };
