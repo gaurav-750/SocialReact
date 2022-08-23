@@ -38,20 +38,6 @@ const customFetch = async (url, { body, ...customConfig }) => {
       };
     }
 
-    // await fetch(url, config)
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.success) {
-    //       console.log('data:', data);
-    //       return {
-    //         data: data.data,
-    //         success: true,
-    //       };
-    //     }
-    // })
-
     throw new Error(data.message); //else throw the error => will go in catch
   } catch (error) {
     console.log('error:', error.message);
@@ -61,56 +47,6 @@ const customFetch = async (url, { body, ...customConfig }) => {
     };
   }
 };
-
-// const customFetch = async (url, { body, ...customConfig }) => {
-//   const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-
-//   const headers = {
-//     'content-type': 'application/x-www-form-urlencoded',
-//     'Access-Control-Allow-Origin': '*',
-//   };
-
-//   if (token) {
-//     headers.Authorization = `Bearer ${token}`;
-//   }
-
-//   const config = {
-//     ...customConfig,
-//     headers: {
-//       ...headers,
-//       ...customConfig.headers,
-//     },
-//   };
-
-//   console.log('c', config);
-
-//   if (body) {
-//     config.body = getBody(body);
-//   }
-
-//   try {
-//     console.log('url', url);
-//     const response = await fetch(url, config);
-//     console.log('MAIN res:', response);
-//     const data = await response.json();
-//     console.log('data:', data);
-
-//     if (data.success) {
-//       return {
-//         data: data.data,
-//         success: true,
-//       };
-//     }
-
-//     throw new Error(data.message);
-//   } catch (error) {
-//     console.error('error');
-//     return {
-//       message: error.message,
-//       success: false,
-//     };
-//   }
-// };
 
 export const getPosts = async (page = 1, limit = 5) => {
   const res = await customFetch(API_URLS.posts(page, limit), {

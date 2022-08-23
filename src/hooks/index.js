@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { login as loginUser, signUp } from '../api';
+
 import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
   setItemInLocalStorage,
 } from '../utils/getBody';
+
 import { LOCAL_STORAGE_TOKEN_KEY } from '../utils';
 import jwtDecode from 'jwt-decode';
 
+//!Wherever you want to use the context hook => 'useContext'
+//*Now instead we have made a function 'useAuth' => so we'll call that
 export const useAuth = () => {
   return useContext(AuthContext);
 };

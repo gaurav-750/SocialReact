@@ -8,8 +8,9 @@ import { AuthProvider } from './providers/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
   <AuthProvider>
+    {/* wrap the App component with AuthProvider */}
+
     <ToastProvider
       autoDismiss
       autoDismissTimeout={3000}
@@ -18,5 +19,4 @@ root.render(
       <App />
     </ToastProvider>
   </AuthProvider>
-  // </React.StrictMode>
 );

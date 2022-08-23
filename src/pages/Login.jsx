@@ -24,6 +24,7 @@ const Login = () => {
 
     // const res = await auth.login(email, password);
     const res = await auth.login(email, password);
+    console.log('res in login:', res);
 
     if (res.success) {
       return addToast('Successfully Logged In!', {

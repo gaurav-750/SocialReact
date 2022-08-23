@@ -2,6 +2,7 @@
 export const setItemInLocalStorage = (key, value) => {
   if (!key || !value) {
     console.error('Cannot store in LocalStorage!');
+    return;
   }
 
   const valueToStore =
@@ -13,7 +14,7 @@ export const setItemInLocalStorage = (key, value) => {
 
 export const getItemFromLocalStorage = (key) => {
   if (!key) {
-    console.error('Cannot get the value from LocalStorage!');
+    return console.error('Cannot get the value from LocalStorage!');
   }
 
   //getting from localstorage:
@@ -23,6 +24,7 @@ export const getItemFromLocalStorage = (key) => {
 export const removeItemFromLocalStorage = (key) => {
   if (!key) {
     console.error('Cannot remove the value from LocalStorage!');
+    return;
   }
 
   //removing from localstorage:
