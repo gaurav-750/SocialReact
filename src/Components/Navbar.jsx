@@ -21,9 +21,9 @@ const Navbar = () => {
       <div className={styles.rightNav}>
         {auth.user && (
           <div className={styles.user}>
-            <Link to="/">
+            <Link to="/settings">
               <img
-                src={process.env.PUBLIC_URL + 'Images/Gauravspiccropped.png'}
+                src={process.env.PUBLIC_URL + 'Images/GauravSomani_circle.png'}
                 alt="Profile"
                 className={styles.userDp}
               />
