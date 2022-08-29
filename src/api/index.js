@@ -74,3 +74,13 @@ export const signUp = async (name, email, password, confirmPassword) => {
   console.log('response in signup api:', res);
   return res;
 };
+
+export const editProfile = async (userId, name, password, confirmPassword) => {
+  const res = await customFetch(API_URLS.editUser(), {
+    method: 'POST',
+    body: { id: userId, name, password, confirm_password: confirmPassword },
+  });
+
+  console.log('response in eidtProfile api:', res);
+  return res;
+};
