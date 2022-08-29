@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../styles/settings.module.css';
 import { useAuth } from '../hooks/index';
 import { useToasts } from 'react-toast-notifications';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Settings = () => {
   const auth = useAuth();
@@ -65,6 +65,10 @@ const Settings = () => {
 
     setSavingForm(false);
   };
+
+  if (!auth.user) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className={styles.settings}>

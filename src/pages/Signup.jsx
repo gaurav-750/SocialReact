@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { useAuth } from '../hooks';
 import styles from '../styles/login.module.css';
@@ -65,6 +65,11 @@ const Signup = () => {
 
     setSigningUp(false);
   };
+
+  //! If the user is logged in, redirect him to Home Page. He mustn't be able to access the login page!
+  if (auth.user) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
