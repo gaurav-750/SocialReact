@@ -8,6 +8,7 @@ import { useAuth } from '../hooks';
 
 import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -30,7 +31,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  if (auth.loading) {
+  if (loading) {
     return <Loader />;
   }
 
@@ -46,7 +47,12 @@ const Home = () => {
                 alt="profile"
               />
               <div>
-                <span className={styles.postAuthor}>{post.user.name}</span>
+                <Link
+                  to={`/user/${post.user._id}`} //* /user/:userId
+                  className={styles.postAuthor}
+                >
+                  {post.user.name}
+                </Link>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>

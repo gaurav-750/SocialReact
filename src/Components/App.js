@@ -6,6 +6,7 @@ import Signup from '../pages/Signup';
 import Navbar from './Navbar';
 import Page404 from './Page404';
 import Settings from '../pages/Settings';
+import UserProfile from '../pages/UserProfile';
 
 const App = () => {
   // const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ const App = () => {
 
           <Route exact path="/signup">
             <Signup />
+          </Route>
+
+          <Route exact path="/user/:userId">
+            <UserProfile />
           </Route>
 
           <Route exact path="/settings">
