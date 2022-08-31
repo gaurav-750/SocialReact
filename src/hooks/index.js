@@ -1,6 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { login as loginUser, signUp, editProfile } from '../api';
+import {
+  login as loginUser,
+  signUp,
+  editProfile,
+  fetchUserFriends,
+} from '../api';
 
 import {
   getItemFromLocalStorage,
@@ -22,17 +27,37 @@ export const useProvideAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userToken = getItemFromLocalStorage(LOCAL_STORAGE_TOKEN_KEY);
-    console.log('Getting the token from ls:', userToken);
+    const getUser = async () => {
+      const userToken = getItemFromLocalStorage(LOCAL_STORAGE_TOKEN_KEY);
+      console.log('Getting the token from ls:', userToken);
 
-    if (userToken) {
-      const user = jwtDecode(userToken);
-      console.log('token after decoding it', user);
+      if (userToken) {
+        const user = jwtDecode(userToken);
+        console.log('token after decoding it', user);
 
-      setUser(user);
-    }
+        //*Fetching user friends : as after decoding the user, we do not get friends array
+        const response = await fetchUserFriends();
+        console.log('After fetching user friends', response);
 
-    setLoading(false);
+        console.log('response.friends:', response.data.friends);
+
+        let friendships = [];
+        if (response.success) {
+          friendships = response.data.friends;
+        } else {
+          friendships = [];
+        }
+
+        setUser({
+          ...user,
+          friendships,
+        });
+      }
+
+      setLoading(false);
+    };
+
+    getUser();
   }, []);
 
   const login = async (email, password) => {
@@ -105,6 +130,18 @@ export const useProvideAuth = () => {
     }
   };
 
+  const updateUserFriend = async (addFriend, friend) => {
+    //* addFriend is gonna be a boolean => true if we need to add, false if we need to remove the friend
+
+    if (addFriend) {
+      setUser({
+        ...user,
+        friendships: [...user.friendships, friend], //spreading the current friends, and adding the new one
+      });
+      return;
+    }
+  };
+
   return {
     user,
     login,
@@ -112,5 +149,6 @@ export const useProvideAuth = () => {
     loading,
     signup,
     updateUser,
+    updateUserFriend,
   };
 };

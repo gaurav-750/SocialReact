@@ -11,6 +11,7 @@ import UserProfile from '../pages/UserProfile';
 const App = () => {
   // const [loading, setLoading] = useState(true);
 
+  console.log('Inside App Component!');
   return (
     <div>
       <Router>

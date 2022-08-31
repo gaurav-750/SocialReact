@@ -49,6 +49,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
 };
 
 export const getPosts = async (page = 1, limit = 5) => {
+  console.log('getposts');
   const res = await customFetch(API_URLS.posts(page, limit), {
     method: 'GET',
   });
@@ -57,6 +58,8 @@ export const getPosts = async (page = 1, limit = 5) => {
 };
 
 export const login = async (email, password) => {
+  console.log('login');
+
   const res = await customFetch(API_URLS.login(), {
     method: 'POST',
     body: { email, password },
@@ -66,6 +69,8 @@ export const login = async (email, password) => {
 };
 
 export const signUp = async (name, email, password, confirmPassword) => {
+  console.log('signup');
+
   const res = await customFetch(API_URLS.signup(), {
     method: 'POST',
     body: { name, email, password, confirm_password: confirmPassword },
@@ -76,6 +81,8 @@ export const signUp = async (name, email, password, confirmPassword) => {
 };
 
 export const editProfile = async (userId, name, password, confirmPassword) => {
+  console.log('editprofile');
+
   const res = await customFetch(API_URLS.editUser(), {
     method: 'POST',
     body: { id: userId, name, password, confirm_password: confirmPassword },
@@ -86,10 +93,41 @@ export const editProfile = async (userId, name, password, confirmPassword) => {
 };
 
 export const fetchUserProfile = async (userId) => {
+  console.log('fetchuserprofile');
   const res = await customFetch(API_URLS.userInfo(userId), {
     method: 'GET',
   });
 
   console.log('response in fetchUserProfile api:', res);
+  return res;
+};
+
+export const fetchUserFriends = async () => {
+  console.log('fetchfriends');
+  const res = await customFetch(API_URLS.friends(), {
+    method: 'GET',
+  });
+
+  console.log('response in fetchuserfriends api:', res);
+  return res;
+};
+
+export const addFriend = async (userId) => {
+  console.log('Add-Friend');
+  const res = await customFetch(API_URLS.createFriendship(userId), {
+    method: 'POST',
+  });
+
+  console.log('response in addfriend api:', res);
+  return res;
+};
+
+export const removeFriend = async (userId) => {
+  console.log('Remove-Friend');
+  const res = await customFetch(API_URLS.removeFriend(userId), {
+    method: 'POST',
+  });
+
+  console.log('response in removeFriend api:', res);
   return res;
 };
