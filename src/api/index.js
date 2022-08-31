@@ -84,3 +84,12 @@ export const editProfile = async (userId, name, password, confirmPassword) => {
   console.log('response in eidtProfile api:', res);
   return res;
 };
+
+export const fetchUserProfile = async (userId) => {
+  const res = await customFetch(API_URLS.userInfo(userId), {
+    method: 'GET',
+  });
+
+  console.log('response in fetchUserProfile api:', res);
+  return res;
+};

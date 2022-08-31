@@ -8,15 +8,10 @@ import { AuthProvider } from './providers/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AuthProvider>
-    {/* wrap the App component with AuthProvider */}
-
-    <ToastProvider
-      autoDismiss
-      autoDismissTimeout={3000}
-      placement={'top-right'}
-    >
+  <ToastProvider autoDismiss autoDismissTimeout={3000} placement={'top-right'}>
+    <AuthProvider>
+      {/* wrap the App component with AuthProvider */}
       <App />
-    </ToastProvider>
-  </AuthProvider>
+    </AuthProvider>
+  </ToastProvider>
 );
