@@ -10,6 +10,7 @@ import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
 import { Link } from 'react-router-dom';
 import FriendList from '../Components/FriendList';
+import CreatePost from '../Components/CreatePost';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -39,6 +40,7 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.postsList}>
+        <CreatePost />
         {posts.map((post) => (
           <div className={styles.postWrapper} key={post._id}>
             <div className={styles.postHeader}>
