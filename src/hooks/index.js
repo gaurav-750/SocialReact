@@ -134,11 +134,21 @@ export const useProvideAuth = () => {
     //* addFriend is gonna be a boolean => true if we need to add, false if we need to remove the friend
 
     if (addFriend) {
+      //* add the friend
       setUser({
         ...user,
         friendships: [...user.friendships, friend], //spreading the current friends, and adding the new one
       });
-      return;
+    } else {
+      //* remove the friend
+      const updatedFriends = user.friendships.filter((f) => {
+        return f.to_user._id !== friend.to_user._id;
+      });
+
+      setUser({
+        ...user,
+        friendships: updatedFriends,
+      });
     }
   };
 

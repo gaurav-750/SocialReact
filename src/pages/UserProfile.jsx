@@ -3,7 +3,7 @@ import styles from '../styles/settings.module.css';
 import { Redirect, useLocation, useParams, useHistory } from 'react-router-dom';
 import { useAuth } from '../hooks/index';
 import { useState } from 'react';
-import { addFriend, fetchUserProfile } from '../api';
+import { addFriend, fetchUserProfile, removeFriend } from '../api';
 import { useToasts } from 'react-toast-notifications';
 import Loader from '../Components/Loader';
 
@@ -89,7 +89,30 @@ const UserProfile = () => {
     }
   };
 
-  const handleRemoveFriendClick = () => {};
+  const handleRemoveFriendClick = async () => {
+    const res = await removeFriend(userId);
+    console.log('res in remove friend in userprofile:', res);
+
+    if (res.success) {
+      console.log('res.data in handleremovefriend', res.data);
+
+      //* find the friend which is to be deleted:
+      const friendToBeDeleted = auth.user.friendships.filter((friend) => {
+        return friend.to_user._id === userId;
+      });
+
+      console.log('Friend to be deleted:', friendToBeDeleted);
+
+      auth.updateUserFriend(false, friendToBeDeleted[0]);
+      addToast('Friend Removed successfully', {
+        appearance: 'success',
+      });
+    } else {
+      addToast(res.message, {
+        appearance: 'error',
+      });
+    }
+  };
 
   return (
     <div className={styles.settings}>
@@ -129,3 +152,14 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+
+/*
+
+//*Deleting a Friend:
+  1. Make an api call.
+  2. Find the friend which is to be deleted
+  3. Call updateUserFriend function and remove the friend to be deleted from the 
+      friendships array.
+  4. Update the Local State.
+
+*/
