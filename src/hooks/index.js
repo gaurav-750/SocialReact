@@ -5,6 +5,7 @@ import {
   signUp,
   editProfile,
   fetchUserFriends,
+  getPosts,
 } from '../api';
 
 import {
@@ -15,6 +16,7 @@ import {
 
 import { LOCAL_STORAGE_TOKEN_KEY } from '../utils';
 import jwtDecode from 'jwt-decode';
+import { PostContext } from '../providers/PostProvider';
 
 //!Wherever you want to use the context hook => we use 'useContext'
 //*Now instead we have made a function 'useAuth' => so we'll call that
@@ -160,5 +162,48 @@ export const useProvideAuth = () => {
     signup,
     updateUser,
     updateUserFriend,
+  };
+};
+
+//* Post Context
+
+export const usePosts = () => {
+  return useContext(PostContext);
+};
+
+export const useProvidePosts = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getPosts();
+      console.log('response in useEffect of useProvidePosts', response);
+
+      if (response.success) {
+        setPosts(response.data.posts);
+      }
+      setLoading(false);
+    };
+
+    // call the function
+    fetchData();
+  }, []);
+
+  const addPostToState = (postToBeAdded) => {
+    const newPosts = [postToBeAdded, ...posts];
+
+    setPosts(newPosts);
+    /* 🛑 IMP 🛑
+        After updating the state of posts =>
+        Since we r using 'Provider', so all the descendants of the App Component
+        will get updated accorfingly!
+    */
+  };
+
+  return {
+    data: posts,
+    loading,
+    addPostToState,
   };
 };

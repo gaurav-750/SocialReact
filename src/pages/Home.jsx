@@ -1,10 +1,9 @@
 import styles from '../styles/home.module.css';
 import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { getPosts } from '../api';
 import React, { useEffect, useState } from 'react';
 import Loader from '../Components/Loader';
-import { useAuth } from '../hooks';
+import { useAuth, usePosts } from '../hooks';
 
 import propTypes from 'prop-types';
 import Comments from '../Components/Comments';
@@ -13,27 +12,12 @@ import FriendList from '../Components/FriendList';
 import CreatePost from '../Components/CreatePost';
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const auth = useAuth();
+  const posts = usePosts();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getPosts();
-      console.log('response in home', response);
+  console.log('POSTS FROM USEPOSTS:', posts);
 
-      if (response.success) {
-        setPosts(response.data.posts);
-        setLoading(false);
-      }
-    };
-
-    // call the function
-    fetchData();
-  }, []);
-
-  if (loading) {
+  if (posts.loading) {
     return <Loader />;
   }
 
@@ -41,7 +25,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles.postsList}>
         <CreatePost />
-        {posts.map((post) => (
+        {posts.data.map((post) => (
           <div className={styles.postWrapper} key={post._id}>
             <div className={styles.postHeader}>
               <div className={styles.postAvatar}>

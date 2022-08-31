@@ -54,6 +54,8 @@ export const getPosts = async (page = 1, limit = 5) => {
     method: 'GET',
   });
 
+  console.log('response inside api/getPosts', res);
+
   return res;
 };
 
@@ -129,5 +131,17 @@ export const removeFriend = async (userId) => {
   });
 
   console.log('response in removeFriend api:', res);
+  return res;
+};
+
+export const createPost = async (content) => {
+  const res = await customFetch(API_URLS.createPost(), {
+    method: 'POST',
+    body: {
+      content,
+    },
+  });
+
+  console.log('response in createPost api:', res);
   return res;
 };
