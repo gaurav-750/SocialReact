@@ -19,7 +19,6 @@ const FriendList = () => {
 
       {friends &&
         friends.map((friend) => {
-          console.log('friend in map', friend);
           return (
             <div key={`friend-${friend._id}`}>
               <Link

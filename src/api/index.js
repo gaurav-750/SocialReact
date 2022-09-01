@@ -145,3 +145,16 @@ export const createPost = async (content) => {
   console.log('response in createPost api:', res);
   return res;
 };
+
+export const createComment = async (content, postId) => {
+  const res = await customFetch(API_URLS.comment(), {
+    method: 'POST',
+    body: {
+      post_id: postId,
+      content,
+    },
+  });
+
+  console.log('response in createPost api:', res);
+  return res;
+};

@@ -197,13 +197,28 @@ export const useProvidePosts = () => {
     /* 🛑 IMP 🛑
         After updating the state of posts =>
         Since we r using 'Provider', so all the descendants of the App Component
-        will get updated accorfingly!
+        will get updated accordingly!
     */
+  };
+
+  const addComment = (comment, postId) => {
+    const newPosts = posts.map((post) => {
+      if (post._id == postId) {
+        //updating the comments array of the post
+        return { ...post, comments: [...post.comments, comment] };
+      }
+      return post;
+    });
+
+    console.log('NEWPOSTS', newPosts);
+
+    setPosts(newPosts);
   };
 
   return {
     data: posts,
     loading,
     addPostToState,
+    addComment,
   };
 };
