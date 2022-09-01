@@ -158,3 +158,11 @@ export const toggleLike = async (itemId, itemType) => {
 
   return res;
 };
+
+export const searchUsers = async (searchText) => {
+  const res = await customFetch(API_URLS.searchUsers(searchText), {
+    method: 'GET',
+  });
+
+  return res;
+};
