@@ -78,7 +78,6 @@ export const signUp = async (name, email, password, confirmPassword) => {
     body: { name, email, password, confirm_password: confirmPassword },
   });
 
-  console.log('response in signup api:', res);
   return res;
 };
 
@@ -90,7 +89,6 @@ export const editProfile = async (userId, name, password, confirmPassword) => {
     body: { id: userId, name, password, confirm_password: confirmPassword },
   });
 
-  console.log('response in eidtProfile api:', res);
   return res;
 };
 
@@ -100,7 +98,6 @@ export const fetchUserProfile = async (userId) => {
     method: 'GET',
   });
 
-  console.log('response in fetchUserProfile api:', res);
   return res;
 };
 
@@ -110,7 +107,6 @@ export const fetchUserFriends = async () => {
     method: 'GET',
   });
 
-  console.log('response in fetchuserfriends api:', res);
   return res;
 };
 
@@ -120,7 +116,6 @@ export const addFriend = async (userId) => {
     method: 'POST',
   });
 
-  console.log('response in addfriend api:', res);
   return res;
 };
 
@@ -130,7 +125,6 @@ export const removeFriend = async (userId) => {
     method: 'POST',
   });
 
-  console.log('response in removeFriend api:', res);
   return res;
 };
 
@@ -142,7 +136,6 @@ export const createPost = async (content) => {
     },
   });
 
-  console.log('response in createPost api:', res);
   return res;
 };
 
@@ -155,6 +148,13 @@ export const createComment = async (content, postId) => {
     },
   });
 
-  console.log('response in createPost api:', res);
+  return res;
+};
+
+export const toggleLike = async (itemId, itemType) => {
+  const res = await customFetch(API_URLS.toggleLike(itemId, itemType), {
+    method: 'POST',
+  });
+
   return res;
 };

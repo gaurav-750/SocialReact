@@ -116,7 +116,9 @@ const UserProfile = () => {
 
   return (
     <div className={styles.settings}>
-      <div className={styles.imgContainer}></div>
+      <div className={styles.imgContainer}>
+        <img src={process.env.PUBLIC_URL + '../' + 'Images/man.png'} alt="" />
+      </div>
 
       <div className={styles.field}>
         <div className={styles.fieldLabel}>Email</div>

@@ -1,12 +1,35 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { Home, Login } from '../pages/index';
 import Signup from '../pages/Signup';
 import Navbar from './Navbar';
 import Page404 from './Page404';
 import Settings from '../pages/Settings';
 import UserProfile from '../pages/UserProfile';
+import { useAuth } from '../hooks/index';
+
+function PrivateRoute({ children, ...rest }) {
+  const auth = useAuth();
+
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        if (auth.user) {
+          return children;
+        }
+
+        return <Redirect to="/login" />;
+      }}
+    />
+  );
+}
 
 const App = () => {
   // const [loading, setLoading] = useState(true);

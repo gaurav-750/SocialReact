@@ -7,7 +7,7 @@ import { useToasts } from 'react-toast-notifications';
 
 import Comments from '../Components/Comments';
 import { Link } from 'react-router-dom';
-import { createComment } from '../api';
+import { createComment, toggleLike } from '../api';
 
 const Posts = ({ post }) => {
   const posts = usePosts();
@@ -36,6 +36,29 @@ const Posts = ({ post }) => {
       }
 
       setCreatingComment(false);
+    }
+  };
+
+  const handlePostLike = async () => {
+    const res = await toggleLike(post._id, 'Post');
+    console.log('Response after toggling like button:', res);
+
+    if (res.success) {
+      if (res.data.deleted) {
+        //like removed successfully
+        addToast('Like removed successfully!', {
+          appearance: 'success',
+        });
+      } else {
+        //* like added
+        addToast('Like added successfully!', {
+          appearance: 'success',
+        });
+      }
+    } else {
+      addToast(res.message, {
+        appearance: 'error',
+      });
     }
   };
 
@@ -71,7 +94,7 @@ const Posts = ({ post }) => {
 
           <div className={styles.postActions}>
             <div className={styles.postLike}>
-              <FavoriteIcon />
+              <FavoriteIcon onClick={handlePostLike} />
               <span>{post.likes.length}</span>
             </div>
 

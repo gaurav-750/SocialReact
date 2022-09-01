@@ -40,6 +40,7 @@ const Login = () => {
 
   //! If the user is logged in, redirect him to Home Page. He mustn't be able to access the login page!
   if (auth.user) {
+    console.log('inside login page');
     return <Redirect to="/" />;
   }
 
